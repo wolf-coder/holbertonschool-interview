@@ -20,6 +20,7 @@ void print_grid(int grid[3][3])
 		printf("\n");
 	}
 }
+
 /**
  * Target_cases - modify target_case; a 3x3 binary valued grid with:
  * 1 -> case to topple, and 0 -> not to topple.
@@ -29,7 +30,6 @@ void print_grid(int grid[3][3])
 void Target_cases(int target_case[3][3], int grid1[3][3])
 {
 	int i, j;
-
 
 	for (i = 0; i < 3; ++i)
 	{
@@ -69,12 +69,15 @@ int to_topple_more(int target_case[3][3], int *tople)
  * sandpiles_sum - function that computes the sum of two sandpiles.
  * @grid1: a 3x3 grid.
  * @grid2: a 3x3 grid.
- * Return: 1 or 0.
+ * Return: Void.
  */
 void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 {
-	int i, j, topple_more = 1, target_case[3][3] = {0};
-	/* Making grid1 = grid1 + grid2 */
+	int i, j, topple_more = 1, target_case[3][3] = {
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
+	};
 	for (i = 0; i < 3; ++i)
 	{
 		for (j = 0; j < 3; ++j)
@@ -91,18 +94,13 @@ void sandpiles_sum(int grid1[3][3], int grid2[3][3])
 			{
 				if (target_case[i][j])
 				{
-					/*FOCAL TOPPLING*/
 					grid1[i][j] -= 4;
-					/*left toppling*/
 					if (j != 0)
 						grid1[i][j - 1] += 1;
-					/*up toppling*/
 					if (i != 0)
 						grid1[i - 1][j] += 1;
-					/*right toppling*/
 					if (j != 2)
 						grid1[i][j + 1] += 1;
-					/*buttom toppling*/
 					if (i != 2)
 						grid1[i + 1][j] += 1;
 				}
