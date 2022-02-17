@@ -11,7 +11,7 @@ def validUTF8(data):
     sig_byte = 0
 
     for item in data:
-        Byte = format(item, '#010b')[2:]
+        Byte = format(item, '#010b')[-8:]
         if sig_byte == 0:
             for bit in Byte:
                 if bit == '0':
