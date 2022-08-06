@@ -2,12 +2,14 @@
 
 import sys
 global N
+global L  # list of solution
 
+
+L = []
 Arg_line = sys.argv
 if len(Arg_line) != 2:
     print("Usage: nqueens N")
     sys.exit(1)
-
 try:
     N = int(Arg_line[1])
 except ValueError:
@@ -41,16 +43,13 @@ def queen(P):
                 Pc = P.copy()
                 Pc.append([j+1, i])
                 Res = queen(Pc)
-                if not Res:
-                    continue
-                else:
-                    return Res
         return False
     else:
+        L.append(P)
         return P
 
 
 for i in range(N):
-    solution = queen([[0, i]])
-    if solution:
-        print(solution)
+    queen([[0, i]])
+for solution in L:
+    print(solution)
