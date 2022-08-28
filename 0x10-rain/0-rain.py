@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-
+total amount of rainwater retained.
 """
 
 
@@ -29,7 +29,8 @@ def rain(walls):
         walls[-1]) are not walls, meaning they will not retain water.
     - If the list is empty return 0.
     """
-
+    if walls == []:
+        return 0
     # Transform walls into a matrix
     matrix = []
     Max_wall = max(walls)
