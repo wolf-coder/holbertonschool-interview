@@ -1,68 +1,44 @@
 #include "search.h"
 
-/**
- * linear_skip - searches for a value in a sorted skip list of integers
- *
- */
+
+
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-	size_t i, x, ex;
-	int n;
-	skiplist_t *current, *express;
-	char *msg;
 
-	msg = "Value found between indexes";
-	if (!list)
+	skiplist_t *tmp = list;
+
+	if (list == NULL)
 		return (NULL);
-	current = list;
-	while (current)
+	while (tmp->express != NULL)
 	{
-		if (current->express)
-			express = current->express;
-		else
+		printf("Value checked at index [%lu] = [%d]\n",
+		 tmp->express->index, tmp->express->n);
+		if (tmp->express->n >= value)
 		{
-			express = current;
-			while (express && express->next)
-				express = express->next;
-			i = current->index;
-			x = express->index;
-			printf("%s [%lu] and [%lu]\n", msg, i, x);
-			return (search(current, value));
-		}
-		ex = express->index;
-		n = express->n;
-		printf("Value checked at index [%lu] = [%d]\n", ex, n);
-		if (express->n >= value)
-		{
-			i = current->index;
-			x = express->index;
-			printf("%s [%lu] and [%lu]\n", msg, i, x);
-			return (search(current, value));
-		}
-		if (current->express)
-			current = current->express;
-		else
+			printf("Value found between indexes [%lu] and [%ld]\n",
+			 tmp->index, tmp->express->index);
 			break;
+		}
+		tmp = tmp->express;
 	}
-	return (NULL);
-}
-/**
- * search - searchs in the nodes between the current and express.
- *
- * @list: pointer to the head
- * @value: value to search for
- *
- * Return: node or Null
- */
-skiplist_t *search(skiplist_t *list, int value)
-{
-	skiplist_t *c;
-
-	for (c = list; c; c = c->next)
+	if (tmp->express == NULL)
 	{
-		printf("Value checked at index [%lu] = [%d]\n", c->index, c->n);
-		if (c->n == value)
-			return (c);
+		for (list = tmp; list->next != NULL; list = list->next)
+		;
+		printf("Value found between indexes [%lu] and [%ld]\n",
+		 tmp->index, list->index);
 	}
-	return (NULL);
+	for (list = tmp ; list != tmp->express ; list = list->next)
+	{
+		printf("Value checked at index [%lu] = [%d]\n",
+		 list->index, list->n);
+		if (value == list->n)
+		{
+			break;
+		}
+	}
+	if (list == tmp->express)
+		return (NULL);
+	else
+		return (list);
 }
