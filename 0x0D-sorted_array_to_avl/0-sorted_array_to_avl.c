@@ -1,65 +1,69 @@
 #include "binary_trees.h"
 
 /**
- * sorted_array_to_avl - Builds an AVL tree from an array
- * @array: pointer to the first element of the array to be converted
- * @size: number of elements in the array
+ * binary_tree_node - Creates a binary tree node
  *
- * Return: pointer to the root node of the created AVL tree, or NULL on failure
+ * @parent: Pointer to the parent node of the node
+ * to create
+ * @value: The value to insert in the new node
+ *
+ * Return: Pointer to the created node or
+ * NULL if the function fails
  **/
-avl_t *sorted_array_to_avl(int *array, size_t size)
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 {
-	avl_t *tree = NULL;
+	binary_tree_t *node;
 
-	if (!array)
+	node = malloc(sizeof(binary_tree_t));
+	if (node == NULL)
 		return (NULL);
-
-	return (create_tree(tree, array, 0, size - 1));
+	node->left = NULL;
+	node->right = NULL;
+	node->parent = parent;
+	node->n = value;
+	return (node);
 }
 
 /**
- * create_tree - creates an AVL tree
- * @tree: pointer to the tree
+ * array_to_avl_rec - builds an AVL tree from an array
  *
- * Return: pointer to the root node of the created AVL tree, or NULL on failure
- **/
-avl_t *create_tree(avl_t *tree, int *array, int start, int end)
+ * @array: The array to be printed
+ * @parent: A pointer to the parent node of the node to create
+ * @start: Index of the first element
+ * @end: Index of the last element
+ *
+ * Return: binary tree on success, NULL on failure
+ */
+avl_t *array_to_avl_rec(int *array, size_t start, size_t end,
+						avl_t *parent)
 {
-	size_t mid = (start + end) / 2;
-	avl_t *node;
+	size_t mid;
+	avl_t *root;
 
 	if (start > end)
 		return (NULL);
 
-	node = node_maker(array[mid]);
-	if (!node)
+	mid = (start + end) / 2;
+	root = binary_tree_node(parent, array[mid]);
+	if (!root)
 		return (NULL);
 
-	node->parent = tree;
-	node->left = create_tree(node, array, start, mid - 1);
-	node->right = create_tree(node, array, mid + 1, end);
+	if (mid != start)
+		root->left = array_to_avl_rec(array, start, mid - 1, root);
 
-	return (node);
+	if (mid != end)
+		root->right = array_to_avl_rec(array, mid + 1, end, root);
+
+	return (root);
 }
 
-/**
- * node_maker - creates a node to an AVL tree
- * @n: data contained in node
- *
- * Return: node or NULL on failure
- **/
-avl_t *node_maker(int n)
+avl_t *sorted_array_to_avl(int *array, size_t size)
 {
-	avl_t *node;
+	avl_t *root;
 
-	node = malloc(sizeof(avl_t));
-	if (!node)
+	if (!array || !size)
 		return (NULL);
 
-	node->n = n;
-	node->parent = NULL;
-	node->left = NULL;
-	node->right = NULL;
-
-	return (node);
+	root = array_to_avl_rec(array, 0, size - 1, NULL);
+	return (root);
 }
