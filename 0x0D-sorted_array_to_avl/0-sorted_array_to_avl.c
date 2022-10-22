@@ -1,69 +1,96 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_node - Creates a binary tree node
- *
- * @parent: Pointer to the parent node of the node
- * to create
- * @value: The value to insert in the new node
- *
- * Return: Pointer to the created node or
- * NULL if the function fails
- **/
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
-{
-	binary_tree_t *node;
-
-	node = malloc(sizeof(binary_tree_t));
-	if (node == NULL)
-		return (NULL);
-	node->left = NULL;
-	node->right = NULL;
-	node->parent = parent;
-	node->n = value;
-	return (node);
-}
-
-/**
- * array_to_avl_rec - builds an AVL tree from an array
- *
- * @array: The array to be printed
- * @parent: A pointer to the parent node of the node to create
- * @start: Index of the first element
- * @end: Index of the last element
- *
- * Return: binary tree on success, NULL on failure
+ * sorted_array_to_avl - Stores recursively each level in
  */
-avl_t *array_to_avl_rec(int *array, size_t start, size_t end,
-						avl_t *parent)
-{
-	size_t mid;
-	avl_t *root;
-
-	if (start > end)
-		return (NULL);
-
-	mid = (start + end) / 2;
-	root = binary_tree_node(parent, array[mid]);
-	if (!root)
-		return (NULL);
-
-	if (mid != start)
-		root->left = array_to_avl_rec(array, start, mid - 1, root);
-
-	if (mid != end)
-		root->right = array_to_avl_rec(array, mid + 1, end, root);
-
-	return (root);
-}
 
 avl_t *sorted_array_to_avl(int *array, size_t size)
 {
-	avl_t *root;
+	avl_t *tree;
+	size_t middle = size / 2, i, middle_m = (middle / 2) + 1;
+	int idx = 0;
 
 	if (!array || !size)
 		return (NULL);
 
-	root = array_to_avl_rec(array, 0, size - 1, NULL);
-	return (root);
+	tree = malloc(sizeof(avl_t));
+	if (!tree)
+		return (NULL);
+	tree->n = array[middle];
+	tree->parent = NULL;
+	tree->left = NULL;
+	tree->right = NULL;
+
+	for (i = 1; i < size; i++)
+	{
+
+		if (i == 1)
+			idx = middle - middle_m;
+		else if (i == 2)
+			idx = middle + middle_m;
+		else if (i == 3)
+			idx = middle - (middle_m + (middle_m / 2));
+		else if (i == 4)
+			idx = middle - (middle_m / 2);
+		else if (i == 5)
+			idx = middle + (middle_m / 2);
+		else if (i == 6)
+			idx = middle + (middle_m + (middle_m / 2));
+		else if (i == 7)
+			idx = middle - middle;
+		else
+			idx = idx + 2;
+		insert_node(&tree, array[idx]);
+	}
+
+	return (tree);
+}
+
+/**
+ * insert_node - Inserts a node in a binary tree
+ * @tree: Pointer to the node to insert
+ * @value: Value to insert
+ *
+ * Return: Pointer to the new node
+ */
+
+void insert_node(avl_t **tree, int value)
+{
+	avl_t *new_node;
+	avl_t *current;
+
+	if (!tree || !*tree)
+		return;
+
+	current = *tree;
+	new_node = malloc(sizeof(avl_t));
+
+	if (!new_node)
+		return;
+
+	new_node->n = value;
+	new_node->parent = current;
+	new_node->left = NULL;
+	new_node->right = NULL;
+
+	if (current->left == NULL)
+		current->left = new_node;
+	else if (current->right == NULL)
+		current->right = new_node;
+	else if (current->left->left == NULL || current->left->right == NULL)
+		insert_node(&current->left, value);
+	else if (current->right->left == NULL || current->right->right == NULL)
+		insert_node(&current->right, value);
+	else if (current->left->left->left == NULL ||
+			 current->left->left->right == NULL)
+		insert_node(&current->left->left, value);
+	else if (current->left->right->left == NULL ||
+			 current->left->right->right == NULL)
+		insert_node(&current->left->right, value);
+	else if (current->right->left->left == NULL ||
+			 current->right->left->right == NULL)
+		insert_node(&current->right->left, value);
+	else if (current->right->right->left == NULL ||
+			 current->right->right->right == NULL)
+		insert_node(&current->right->right, value);
 }
