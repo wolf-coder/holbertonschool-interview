@@ -1,6 +1,6 @@
 #include "sort.h"
 /**
-
+ * swap - Swapping two elements.
  * @a: first element.
  * @b: second element.
  */
@@ -38,7 +38,7 @@ void heap_sort(int *array, size_t size)
 /**
  * heapify - Indexing
  * @array: the array.
- * @size: size of the array,
+ * @size: size of the array.
  * @parent: index of the parent node.
  * @last: index.
  */
