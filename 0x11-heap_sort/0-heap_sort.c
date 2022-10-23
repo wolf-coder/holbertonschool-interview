@@ -1,6 +1,6 @@
 #include "sort.h"
 /**
- * swap - swapping two elements.
+
  * @a: first element.
  * @b: second element.
  */
@@ -10,7 +10,6 @@ void swap(int *a, int *b)
 	int temp = *a;
 
 	*a = *b;
-
 	*b = temp;
 }
 /**
@@ -37,11 +36,11 @@ void heap_sort(int *array, size_t size)
 }
 
 /**
-
- * @array: the array is treated as a complete binary tree
- * @size: size of the array
- * @parent: index of the parent node (it will be compared with its children)
- * @last: index to mark the end of the unsorted part of the array
+ * heapify - Indexing
+ * @array: the array.
+ * @size: size of the array,
+ * @parent: index of the parent node.
+ * @last: index.
  */
 void heapify(int *array, int size, int parent, int last)
 {
