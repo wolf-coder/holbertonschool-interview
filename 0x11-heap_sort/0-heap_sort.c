@@ -19,18 +19,18 @@ void swap(int *a, int *b)
  */
 void heap_sort(int *array, size_t size)
 {
-	int i, last;
+	int i, Tail;
 
 	if (!array || size <= 1)
 		return;
-	last = (int)size - 1;
-	for (last = (int)size - 1; last > 0; last--)
+	Tail = (int)size - 1;
+	for (Tail = (int)size - 1; Tail > 0; Tail--)
 	{
-		for (i = last; i >= 0; i--)
+		for (i = Tail; i >= 0; i--)
 		{
-			heapify(array, (int)size, i, last);
+			heapify(array, (int)size, i, Tail);
 		}
-		swap(&array[0], &array[last]);
+		swap(&array[0], &array[Tail]);
 		print_array((const int *)array, size);
 	}
 }
