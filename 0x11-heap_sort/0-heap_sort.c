@@ -57,8 +57,8 @@ void heapify(int *array, int size, int parent, int last)
 		print_array((const int *)array, (size_t)size);
 		heapify(array, size, right, last);
 	}
-	if ((LEFT <= last &&
-	(right > last || array[LEFT] > array[right])) && array[LEFT] > array[parent])
+	if (((right > last || array[LEFT] > array[right]) && LEFT <= last)
+	    && array[LEFT] > array[parent])
 	{
 		swap(&array[parent], &array[LEFT]);
 		print_array((const int *)array, (size_t)size);
