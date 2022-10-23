@@ -44,24 +44,24 @@ void heap_sort(int *array, size_t size)
  */
 void heapify(int *array, int size, int parent, int last)
 {
-	int left, right;
+	int LEFT, right;
 
-	left = (parent * 2) + 1;
+	LEFT = (parent * 2) + 1;
 	right = (parent * 2) + 2;
 	if (parent < 0 || parent >= size - 1)
 		return;
 	if (right <= last &&
-	(array[right] >= array[left] && array[right] > array[parent]))
+	(array[right] >= array[LEFT] && array[right] > array[parent]))
 	{
 		swap(&array[parent], &array[right]);
 		print_array((const int *)array, (size_t)size);
 		heapify(array, size, right, last);
 	}
-	if ((left <= last &&
-	(right > last || array[left] > array[right])) && array[left] > array[parent])
+	if ((LEFT <= last &&
+	(right > last || array[LEFT] > array[right])) && array[LEFT] > array[parent])
 	{
-		swap(&array[parent], &array[left]);
+		swap(&array[parent], &array[LEFT]);
 		print_array((const int *)array, (size_t)size);
-		heapify(array, size, left, last);
+		heapify(array, size, LEFT, last);
 	}
 }
