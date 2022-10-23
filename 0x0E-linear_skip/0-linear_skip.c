@@ -21,7 +21,7 @@ skiplist_t *linear_skip(skiplist_t *list, int value)
 		}
 		Tmp = Tmp->express;
 	}
-	if (Tmp->express == NULL)
+	if (!Tmp->express)
 	{
 		for (list = Tmp; list->next != NULL; list = list->next)
 		;
