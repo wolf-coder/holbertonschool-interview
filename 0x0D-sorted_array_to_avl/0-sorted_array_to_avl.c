@@ -29,9 +29,9 @@ avl_t *ArrayToAVL(int *array, int start, int end, avl_t *parent)
 
 }
 /**
- 
+ * sorted_array_to_avl - Prints a binary tree
  *
- * @array: sorted array to be converted to a binary tree
+ * @array: sorted array
  * @size: size of the array
  * Return: AVL tree
  */
