@@ -3,7 +3,8 @@
 Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
-import sys
+
+INF = 10000
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
@@ -12,22 +13,26 @@ def makeChange(coins, total):
         If total is 0 or less, return 0
         If total cannot be met by any number of coins you have, return -1
     """
-    amount = total
-    if amount <= 0 :
+    k = len(coins)
+    n = total
+    d= coins
+    if total <= 0:
         return 0
-    if min(coins) > amount:
+    M = [0]*(n+1)
+    S = [0]*(n+1)
+#    breakpoint()
+    for j in range(1, n+1):
+        minimum = INF
+        coin = 0
+
+        for i in range(1, k):
+            #breakpoint()
+            if(j >= d[i]):
+                minimum = min(minimum, 1+M[j-d[i]])
+                coin = i
+        M[j] = minimum
+        S[j] = coin
+    if M[n] == INF:
         return -1
-    dp = [-1 for i in range(0, amount + 1)]
-    for i in coins:
-        if i > len(dp) - 1:
-            continue
-        dp[i] = 1
-        for j in range(i + 1, amount + 1):
-            if dp[j - i] == -1:
-                continue
-            elif dp[j] == -1:
-                dp[j] = dp[j - i] + 1
-            else:
-                dp[j] = min(dp[j], dp[j - i] + 1)
-        #print(dp)
-    return dp[amount]
+    return M[n]
+
