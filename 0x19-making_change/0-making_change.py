@@ -12,26 +12,22 @@ def makeChange(coins, total):
         If total is 0 or less, return 0
         If total cannot be met by any number of coins you have, return -1
     """
-    if total<=0:
+    amount = total
+    if amount <= 0 :
         return 0
-
-    matrix = [0 for i in range(total + 1)]
-
-    matrix[0] = 0
-
-
-    for i in range(1, total + 1):
-        matrix[i] = sys.maxsize # (Initialise the matrix elements to Infinity)
-
-    for i in range(1, total + 1):
-        for j in range(len(coins)):
-            if (coins[j] <= i):
-                sub_res = matrix[i - coins[j]]
-                if (sub_res != sys.maxsize and
-                    sub_res + 1 < matrix[i]):
-                    matrix[i] = sub_res + 1
-
-    if matrix[total] == sys.maxsize:
+    if min(coins) > amount:
         return -1
-
-    return matrix[total]
+    dp = [-1 for i in range(0, amount + 1)]
+    for i in coins:
+        if i > len(dp) - 1:
+            continue
+        dp[i] = 1
+        for j in range(i + 1, amount + 1):
+            if dp[j - i] == -1:
+                continue
+            elif dp[j] == -1:
+                dp[j] = dp[j - i] + 1
+            else:
+                dp[j] = min(dp[j], dp[j - i] + 1)
+        #print(dp)
+    return dp[amount]
