@@ -12,9 +12,9 @@ def makeChange(coins, total):
         If total is 0 or less, return 0
         If total cannot be met by any number of coins you have, return -1
     """
-    coins = sorted(coins, reverse=True)
     if total <= 0:
         return 0
+    coins = sorted(coins, reverse=True)
 
     matrix = [0 for i in range(total + 1)]
 
