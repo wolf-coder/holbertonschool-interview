@@ -4,11 +4,12 @@ Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
 
-INF = 9223372036854775807
+INF = 922337203685477580
+
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
-    + total: 
+    + total: amount to satisfy
     + Return: fewest number of coins needed to meet total
         If total is 0 or less, return 0
         If total cannot be met by any number of coins you have, return -1
