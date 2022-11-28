@@ -18,12 +18,9 @@ def makeChange(coins, total):
         return 0
     coins = sorted(coins, reverse=False)
 
-    matrix = [0 for i in range(total + 1)]
+    matrix = [INF for i in range(total + 1)]
 
     matrix[0] = 0
-
-    for i in range(1, total + 1):
-        matrix[i] = INF  # (Initialise the matrix elements to Infinity)
 
     for i in range(1, total + 1):
         for j in range(len(coins)):
