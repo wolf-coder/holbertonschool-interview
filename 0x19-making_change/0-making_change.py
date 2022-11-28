@@ -8,7 +8,8 @@ Auxiliary space: O(total_amount_required) for using extra matrix space
 # INF = 5500000  Cheker  13    Falls
 # INF = 1000000  Cheker  13    Falls
 # INF = 100000   Cheker  13,5  Falls
-INF   = 90000    #Cheker  
+# INF = 90000    Cheker  13,5  Falls
+INF = 50000    #Cheker  13,5  Falls
 # INF = 10000    Cheker  5     Falls
 # INF = 1000     Cheker  5     Falls
 def makeChange(coins, total):
