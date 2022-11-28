@@ -6,7 +6,7 @@ Auxiliary space: O(total_amount_required) for using extra matrix space
 
 #INF = 1000000  # Avoiding `sys.maxsize` for runtime evaluation 13,14
 #INF = 100000  # Avoiding `sys.maxsize` for runtime evaluation
-INF = 5500000
+#INF = 5500000 13,14
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
@@ -17,7 +17,7 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    coins = sorted(coins, reverse=True)
+    coins = sorted(coins, reverse=False)
 
     matrix = [0 for i in range(total + 1)]
 
