@@ -3,7 +3,8 @@
 Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
-import sys
+
+INF = 1000
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
@@ -22,17 +23,17 @@ def makeChange(coins, total):
  
 
     for i in range(1, total + 1):
-        matrix[i] = sys.maxsize # (Initialise the matrix elements to Infinity)
+        matrix[i] = INF # (Initialise the matrix elements to Infinity)
 
     for i in range(1, total + 1):
         for j in range(len(coins)):
             if (coins[j] <= i):
                 sub_res = matrix[i - coins[j]]
-                if (sub_res != sys.maxsize and
+                if (sub_res != INF and
                     sub_res + 1 < matrix[i]):
                     matrix[i] = sub_res + 1
 
-    if matrix[total] == sys.maxsize:
+    if matrix[total] == INF:
         return -1
 
     return matrix[total]
