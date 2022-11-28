@@ -4,8 +4,8 @@ Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
 
-INF = 1000000  # Avoiding `sys.maxsize` for runtime evaluation
-
+#INF = 1000000  # Avoiding `sys.maxsize` for runtime evaluation 13,14
+INF = 100000  # Avoiding `sys.maxsize` for runtime evaluation
 
 def makeChange(coins, total):
     """
