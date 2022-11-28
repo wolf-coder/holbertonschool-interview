@@ -4,7 +4,7 @@ Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
 
-INF = 1000
+INF = 9223372036854775807
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
