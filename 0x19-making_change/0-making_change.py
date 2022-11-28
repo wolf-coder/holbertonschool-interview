@@ -17,7 +17,7 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    coins = sorted(coins, reverse=False)
+    coins = sorted(coins, reverse=True)
 
     matrix = [0 for i in range(total + 1)]
 
