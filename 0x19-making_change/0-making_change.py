@@ -3,9 +3,9 @@
 Time complexity: O(Array_size x total_amount_required).
 Auxiliary space: O(total_amount_required) for using extra matrix space
 """
-
+INF =   100000000
 # INF = 10000000 Checker 13,14 Falls
-INF = 5500000 
+# INF = 5500000  Cheker 13 Falls
 # INF = 1000000  Cheker 13 Falls
 # INF = 100000   Cheker 13,5 Falls
 def makeChange(coins, total):
