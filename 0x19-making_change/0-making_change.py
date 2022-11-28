@@ -5,7 +5,8 @@ Auxiliary space: O(total_amount_required) for using extra matrix space
 """
 
 # INF = 10000000 Checker 13,14 Falls
-INF = 100000
+# INF = 100000   Cheker 13,5 Falls
+INF = 1000000
 def makeChange(coins, total):
     """
     + coins: List containing the possible coins to use.
