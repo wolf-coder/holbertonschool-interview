@@ -17,10 +17,8 @@ List *add_node_end(List **list, char *str)
 {
 	List *new, *head, *tail;
 	char *str_cpy = NULL;
-
 	if (!list)
 		return (NULL);
-
 	new = malloc(sizeof(List));
 	str_cpy = strdup(str);
 	if (!new || !str_cpy)
@@ -28,9 +26,7 @@ List *add_node_end(List **list, char *str)
 	new->str = str_cpy;
 	new->next = new;
 	new->prev = new;
-
 	head = *list;
-
 	if (head)
 	{
 		if (!head->prev && !head->next)
@@ -41,10 +37,8 @@ List *add_node_end(List **list, char *str)
 		else
 		{
 			tail = head->prev;
-
 			tail->next = new;
 			new->next = head;
-
 			head->prev = new;
 			new->prev = tail;
 		}
@@ -54,8 +48,6 @@ List *add_node_end(List **list, char *str)
 
 	return (new);
 }
-
-
 /**
  * add_node_begin - adds node to the start of a doubly circular linked list
  *
@@ -67,10 +59,8 @@ List *add_node_begin(List **list, char *str)
 {
 	List *new, *head, *tail;
 	char *str_cpy = NULL;
-
 	if (!list)
 		return (NULL);
-
 	new = malloc(sizeof(List));
 	str_cpy = strdup(str);
 	if (!new || !str_cpy)
@@ -78,9 +68,7 @@ List *add_node_begin(List **list, char *str)
 	new->str = str_cpy;
 	new->next = new;
 	new->prev = new;
-
 	head = *list;
-
 	if (head)
 	{
 		if (!head->prev && !head->next)
@@ -99,7 +87,6 @@ List *add_node_begin(List **list, char *str)
 			new->prev = tail;
 		}
 	}
-
-	*list =  new;
+	*list = new;
 	return (new);
 }
