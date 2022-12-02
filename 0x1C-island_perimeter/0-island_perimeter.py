@@ -2,7 +2,6 @@
 """
 Calculating the perimeter of the island described in grid
 """
-import numpy as np
 
 
 def island_perimeter(grid):
