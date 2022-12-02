@@ -15,7 +15,8 @@ def island_perimeter(grid):
       + grid is rectangular, with its width and height not exceeding 100
       + The grid is completely surrounded by water
       + There is only one island (or nothing).
-      + The island doesn’t have “lakes” (water inside that isn’t connected to the water surrounding the island).
+      + The island doesn’t have “lakes” (water inside that
+isn’t connected to the water surrounding the island).
     """
     def Two_cell(i, j):
         """
@@ -24,10 +25,10 @@ def island_perimeter(grid):
         """
         subs = 0
         # check right
-        if j < C -1 and grid[i][j+1]==1:
+        if j < C - 1 and grid[i][j + 1] == 1:
             subs += 2
         # check right
-        if i < R -1 and grid[i+1][j]==1:
+        if i < R - 1 and grid[i+1][j] == 1:
             subs += 2
         return -subs
 
@@ -38,5 +39,5 @@ def island_perimeter(grid):
         for j in range(C):
             if grid[i][j] == 1:
                 count += (4 + Two_cell(i, j))
-                
+
     return count
