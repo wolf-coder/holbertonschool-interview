@@ -1,9 +1,11 @@
 #include "sort.h"
+
+
 /**
- * len - checks max element and count it's digits
- * @array: pointer to first element of array
- * @size: size of array
- * Return: integer maximum number of digits
+ * len - checks max element
+ * @size: array size
+ * @array: first element of array (pointer)
+ * Return: max number of digits
  */
 int len(int *array, size_t size)
 {
@@ -19,13 +21,14 @@ int len(int *array, size_t size)
 }
 /**
  * radix_sort - sorts an array using Radix sort algorithm
-
  * @size: size of array
+ * @array: pointer integer, first element of array to sort
  */
 void radix_sort(int *array, size_t size)
 {
-	int BB[100][100], B[100];
-	int i, j, k, r, c, max, div = 1;
+	int Forward[100][100], Back[100];
+	int i, j, k, r, c, max;
+	int div = 1;
 
 	if (!array || size < 2)
 		return;
@@ -34,20 +37,22 @@ void radix_sort(int *array, size_t size)
 	for (c = 0; c < max; c++)
 	{
 		for (i = 0; i < 100; i++)
-			B[i] = 0;
+			Back[i] = 0;
 
+		/*Check B*/
 		for (i = 0; i < (int)size; i++)
 		{
 			r = (array[i] / div) % 10;
-			BB[r][B[r]] = array[i];
-			B[r] += 1;
+			Forward[r][Back[r]] = array[i];
+			Back[r] += 1;
 		}
 		i = 0;
+		/*Check F*/
 		for (k = 0; k < 100; k++)
 		{
-			for (j = 0; j < B[k]; j++)
+			for (j = 0; j < Back[k]; j++)
 			{
-				array[i] = BB[k][j];
+				array[i] = Forward[k][j];
 				i++;
 			}
 		}

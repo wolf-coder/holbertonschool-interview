@@ -1,10 +1,10 @@
-#ifndef _SORT_H_
-#define _SORT_H_
+#ifndef SORT
+#define SORT
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void print_array(const int *array, size_t size);
 void radix_sort(int *array, size_t size);
+void print_array(const int *array, size_t size);
 
-#endif /* _SORT_H_ */
+#endif /* SORT */
